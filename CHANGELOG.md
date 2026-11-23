@@ -7,6 +7,21 @@ are documented in this file. The format is based on
 
 ## [Unreleased]
 
+## [0.1.0-alpha.4] — 2026-11-23
+
+The same results, faster: with every category, 1 MB of log text costs 114 ns per byte instead of 194.
+
+### Changed
+
+- Detection reads long texts faster with the same results: the patterns of national-id, passport,
+  bank-account, tax-id, tracking-number, health-insurance, medical-record, company-registration,
+  drivers-license, license-plate and prescription that begin with a word boundary are tried only
+  where one can start (a run of digits or capitals long enough), instead of each scanning the whole
+  text. With every category, 1 MB of log text costs 137 ns per byte instead of 194.
+- Whether a label comes shortly before a value is now found by binary search among the labels of
+  the text, instead of by checking every label for every candidate value: the same results, and
+  1 MB of log text with every category costs 114 ns per byte instead of 139.
+
 ## [0.1.0-alpha.3] — 2026-11-23
 
 An `Engine` built once with batches on every core, `NewReader` in batches, links with current Go
